@@ -1,0 +1,65 @@
+@use './global-styles.scss' as g;
+
+* {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+}
+
+.tray-item-counter {
+    height: 22px;
+    width: 22px;    
+    bottom: 20px;
+    left: 5px;
+    border-radius: 50%;
+    border: 1px solid g.$theme-primary;
+    font-size: g.$font-size-small;
+    background-color: white;
+    color: g.$theme-primary;
+}
+
+.tray-button {
+    background-color: g.$theme-primary;
+    border: 0;
+    color: white;
+}
+
+.tray-button-outline {
+    background-color: transparent;
+    border: 1px solid #d9d9d9;
+    color: gray;
+}
+
+.tray-dimensions {
+    height: 16px;
+    width: 18px;
+}
+
+.navbar-item {
+    text-decoration: none;
+    color: black;
+    transition-property: font-weight, color;
+    transition: color 250ms;
+}
+
+.navbar-item:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px g.$theme-primary;
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+
+.navbar-item:hover:after { 
+    transform: scaleX(1); 
+}
+
+.navbar-item:hover {
+    color: g.$theme-primary;
+}
+
+.navbar-item.active {
+    color: g.$theme-primary;
+    font-weight: bold;
+}

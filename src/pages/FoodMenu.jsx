@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import FoodItem from "../component/FoodItem.jsx";
+import FoodCard from "../component/FoodCard.jsx";
 import { foods } from "../service/FoodRepository.ts";
 
 class FoodMenu extends React.Component {
@@ -15,7 +15,7 @@ class FoodMenu extends React.Component {
                         {
                             foods.map((food, index) => {
                                 return (
-                                    <FoodItem key={`fooditem-${index}`}
+                                    <FoodCard key={`FoodCard-${index}`}
                                     food={food} 
                                     parentCallback={this.props.parentCallback} />
                                 )

@@ -1,0 +1,26 @@
+@use "./global-styles.scss" as g;
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.text-small {
+    font-size: g.$font-size-small;
+}
+
+.text-notsosmall {
+    font-size: g.$font-size-notsosmall;
+}
+
+.text-medium {
+    font-size: g.$font-size-medium;
+}
+
+.text-large {
+    font-size: g.$font-size-large;
+}
+
+.text-description {
+    color: gray;
+    font-size: 14px;
+}

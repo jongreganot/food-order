@@ -1,0 +1,20 @@
+@use './global-styles.scss' as g;
+
+.add-to-tray-button {
+    background-color: g.$theme-primary;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 250ms ease-in-out;
+
+    &:hover {
+        background-color: g.$theme-secondary;
+    }
+}
+
+.plus-sign {
+    height: 20px;
+    width: 20px;
+    color: white;
+}
