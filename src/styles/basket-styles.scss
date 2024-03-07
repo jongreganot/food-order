@@ -1,0 +1,15 @@
+.basket {
+    width: 0px;
+    height: 100%;
+    position: fixed;
+    background-color: white;
+    right: 0;
+    top: 0;
+    transition: width 1000ms cubic-bezier(0.1, 0.7, 0.6, 0.9);
+    z-index: 2;
+    box-shadow: 10px 10px 10px 10px #888888;
+
+    &.active {
+        width: 500px;
+    }
+}

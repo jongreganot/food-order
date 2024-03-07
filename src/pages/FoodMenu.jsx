@@ -15,8 +15,8 @@ class FoodMenu extends React.Component {
                         foods.map((food, index) => {
                             return (
                                 <FoodCard key={`FoodCard-${index}`}
-                                food={food} 
-                                parentCallback={this.props.parentCallback} />
+                                        food={food} 
+                                        parentAddFoodToBasket={this.props.parentAddFoodToBasket} />
                             )
                         })
                     }

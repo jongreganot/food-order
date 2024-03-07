@@ -7,7 +7,7 @@
     font-style: normal;
 }
 
-.tray-item-counter {
+.basket-item-counter {
     height: 22px;
     width: 22px;    
     bottom: 20px;
@@ -19,19 +19,19 @@
     color: g.$theme-primary;
 }
 
-.tray-button {
+.basket-button {
     background-color: g.$theme-primary;
     border: 0;
     color: white;
 }
 
-.tray-button-outline {
+.basket-button-outline {
     background-color: transparent;
     border: 1px solid #d9d9d9;
     color: gray;
 }
 
-.tray-dimensions {
+.basket-dimensions {
     height: 16px;
     width: 18px;
 }

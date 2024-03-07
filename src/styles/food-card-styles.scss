@@ -1,16 +1,28 @@
 @use './global-styles.scss' as g;
 
-.add-to-tray-button {
-    background-color: g.$theme-primary;
+
+.add-to-basket {
     height: 30px;
     width: 30px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.add-to-basket-button {
+    background-color: g.$theme-primary;
     transition: background-color 250ms ease-in-out;
 
     &:hover {
         background-color: g.$theme-secondary;
     }
+}
+
+.add-to-basket-button-outline {
+    border: 1px solid g.$theme-primary;
+}
+
+.selected {
+    border-right: 5px solid g.$theme-primary;
 }
 
 .plus-sign {
