@@ -53,11 +53,7 @@ class Layout extends React.Component {
                     <div>
                         <Routes>
                             <Route index element={<FoodMenu parentCallback={this.props.parentCallback} />} ></Route>
-                            <Route
-                                exact
-                                path="/"
-                                element={<FoodMenu parentCallback={this.props.parentCallback} />}
-                            ></Route>
+                            <Route path="/food-order" element={<FoodMenu parentCallback={this.props.parentCallback} />} />
                             <Route
                                 exact
                                 path="/food-order/popular"
