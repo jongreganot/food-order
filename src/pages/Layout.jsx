@@ -41,7 +41,7 @@ class Layout extends React.Component {
                                             </svg> 
                                             {this.props.numTrayItems === 0 ?  ''
                                                 : <p className="mb-0 fw-500 ms-2 text-medium">
-                                                    <span className="text-large ms-1">₱</span>1,200.00
+                                                    <span className="text-large ms-1">₱</span>{this.props.totalAmount}
                                                 </p>}
                                         </div>
                                     </button>
@@ -53,6 +53,11 @@ class Layout extends React.Component {
                     <div>
                         <Routes>
                             <Route index element={<FoodMenu parentCallback={this.props.parentCallback} />} ></Route>
+                            <Route
+                                exact
+                                path="/"
+                                element={<FoodMenu parentCallback={this.props.parentCallback} />}
+                            ></Route>
                             <Route
                                 exact
                                 path="/food-order/popular"
