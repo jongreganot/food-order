@@ -20,10 +20,11 @@ class FoodCard extends React.Component {
             foodOrderCount = this.props.foodOrderCount;
             this.setState({foodOrderCount});
             
-            if (this.props.foodOrderCount.orderCount > 0)
+            if (this.props.foodOrderCount.orderCount > 0) {
                 this.setState({
                     basketClass: "add-to-basket-button-outline",
                 });
+            }
         }
     }
 
@@ -32,7 +33,6 @@ class FoodCard extends React.Component {
             basketClass: "add-to-basket-button-outline",
         });
 
-        
         let foodOrderCount = { ...this.state.foodOrderCount };
         foodOrderCount.orderCount =  foodOrderCount.orderCount += 1;
 
@@ -67,8 +67,8 @@ class FoodCard extends React.Component {
                                                 :
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg plus-sign pe-none" viewBox="0 0 16 16">
                                                     <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                                </svg> }
-                                            
+                                                </svg> 
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -79,10 +79,6 @@ class FoodCard extends React.Component {
             </div>
         )
     }
-
-    handleClick = () => {
-        this.props.parentCallback();
-    };
 }
 
 export default FoodCard;

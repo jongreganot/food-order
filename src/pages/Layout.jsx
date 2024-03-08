@@ -24,9 +24,9 @@ class Layout extends React.Component {
         return (
             <Router>
                 <section id="layout">
-                    <div className="shadow py-3">
+                    <div className="shadow py-3 navbar">
                         <div className="container">
-                            <div className="d-flex flex-row align-items-center justify-content-between">
+                            <div className="d-flex flex-row align-items-center justify-content-between w-100">
                                 <nav className="nav nav-underline d-flex flex-row justify-content-start">
                                     <Link to="/food-order/popular" className="navbar-item px-3 pt-2 pb-1 active">Popular</Link>
                                     <Link to="/food-order/about" className="navbar-item px-3 pt-2 pb-1">About Us</Link>
