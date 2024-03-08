@@ -39,9 +39,10 @@ class Basket extends React.Component {
                   
                   return (
                     <BasketItem key={`basketitem-${index}`}
-                      foodOrderCount={foodOrderCount}
+                      foodOrder={this.props.foodOrder}
                       food={food}
-                      parentUpdateFoodToBasket={this.props.parentUpdateFoodToBasket} />
+                      parentUpdateBasket={this.props.parentUpdateBasket}
+                      removeItem={this.props.removeItem} />
                   );
                 })
               }

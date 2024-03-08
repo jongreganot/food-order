@@ -13,12 +13,11 @@ class FoodMenu extends React.Component {
                 <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
                     {
                         foods.map((food, index) => {
-                            let foodOrderCount = this.props.foodOrder.foodOrderCounts.find(f => f.foodId === food.id);
                             return (
                                 <FoodCard key={`FoodCard-${index}`}
                                         food={food} 
-                                        parentUpdateFoodToBasket={this.props.parentUpdateFoodToBasket}
-                                        foodOrderCount={foodOrderCount} />
+                                        parentUpdateBasket={this.props.parentUpdateBasket}
+                                        foodOrder={this.props.foodOrder} />
                             )
                         })
                     }

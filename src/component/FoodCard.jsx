@@ -1,59 +1,40 @@
 import React from "react";
 import "../styles/text-styles.scss"
 import "../styles/component/food-card-styles.scss"
-import { FoodOrderCount } from "../model/FoodOrderCount.ts";
 import { ArithmeticOperations } from "../constants/arithmetic-operations.js";
 
 class FoodCard extends React.Component {
-
-    state = {
-        foodOrderCount: new FoodOrderCount(0, 0)
-    }
 
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        if (this.props.foodOrderCount && this.props.foodOrderCount.foodId != 0) {
-            let foodOrderCount = { ...this.state.foodOrderCount };
-            foodOrderCount = this.props.foodOrderCount;
-            this.setState({foodOrderCount});
-        }
-    }
-
     addToCart() {
-        let foodOrderCount = { ...this.state.foodOrderCount };
-        foodOrderCount.orderCount =  foodOrderCount.orderCount += 1;
-
-        if(foodOrderCount.foodId === 0) {
-            foodOrderCount.foodId = this.props.food.id;
-        }
-        
-        this.setState({foodOrderCount}, () => {
-            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Addition);
-        });
+        this.props.parentUpdateBasket(this.props.food, ArithmeticOperations.Addition);
     }
 
     render () {
-        let { basketClass, foodOrderCount } = this.state;
+        let foodOrderCount = this.props.foodOrder.foodOrderCounts.find(foc => foc.foodId === this.props.food.id);
         return (
             <div className="col user-select-none">
-                <div className={`card mb-4 py-2 px-1 rounded-3 shadow-sm ${foodOrderCount.orderCount > 0 ? 'selected' : ''}`}>
-                    <div className="d-flex flex-row justify-content-center px-3 py-2 align-items-start">
+                <div className={`card mb-4 py-3 px-1 rounded-3 shadow-sm ${foodOrderCount && foodOrderCount.orderCount > 0 ? 'selected' : ''}`}>
+                    <div className="d-flex flex-row justify-content-center px-3 py-2 align-items-start h-100">
                         <div className="col-4">
                             <img src={this.props.food.image} className="d-block img-fluid"></img>
                         </div>
-                        <div className="col-8 ps-4 pe-2">
-                            <div className="text-start">
-                                <p>{this.props.food.name}</p>
-                                <p className="text-description text-medium">{this.props.food.description}</p>
-                                <div className="d-flex flex-row justify-content-between">
-                                    <p className="fw-bold">{this.props.food.price.toFixed(2)}</p>
+                        <div className="col-8 ps-4 pe-2 h-100">
+                            <div className="text-start d-flex flex-column justify-content-between h-100">
+                                <div className="h-90">
+                                    <p>{this.props.food.name}</p>
+                                    <p className="text-description text-medium">{this.props.food.description}</p>
+                                </div>
+
+                                <div className="d-flex flex-row justify-content-between align-items-center h-10">
+                                    <p className="fw-bold mb-0">{this.props.food.price.toFixed(2)}</p>
                                     <div className="d-flex flex-row justify-content-end">
-                                        <div className={`${foodOrderCount.orderCount > 0 ? "add-to-basket-button-outline" : "add-to-basket-button"} add-to-basket d-flex flex-row justify-content-center align-items-center`} onClick={() => this.addToCart()}>
+                                        <div className={`${foodOrderCount && foodOrderCount.orderCount > 0 ? "add-to-basket-button-outline" : "add-to-basket-button"} add-to-basket d-flex flex-row justify-content-center align-items-center`} onClick={() => this.addToCart()}>
                                             { 
-                                                foodOrderCount.orderCount > 0 ? 
+                                                foodOrderCount && foodOrderCount.orderCount > 0 ? 
                                                     <p className="mb-0 text-small">{foodOrderCount.orderCount}</p>
                                                     :
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg plus-sign pe-none" viewBox="0 0 16 16">
@@ -63,6 +44,8 @@ class FoodCard extends React.Component {
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

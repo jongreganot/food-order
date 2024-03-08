@@ -6,7 +6,6 @@ import { ArithmeticOperations } from "../constants/arithmetic-operations.js";
 
 class BasketItem extends React.Component {
     state = {
-        foodOrderCount: new FoodOrderCount(0, 0),
         totalBasketItemAmount: 0.00
     }
 
@@ -14,35 +13,18 @@ class BasketItem extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-    if (this.props.foodOrderCount && this.props.foodOrderCount.foodId != 0) {
-            let foodOrderCount = { ...this.state.foodOrderCount };
-            foodOrderCount = this.props.foodOrderCount;
-            this.setState({foodOrderCount});
-        }
-    }
-
     addOrder() {
-        let foodOrderCount = { ...this.state.foodOrderCount };
-        foodOrderCount.orderCount += 1;
-        this.setState({foodOrderCount}, () => {
-            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Addition);
-        });
+        this.props.parentUpdateBasket(this.props.food, ArithmeticOperations.Addition);
     }
 
     subtractOrder() {
-        let foodOrderCount = { ...this.state.foodOrderCount };
-        foodOrderCount.orderCount -= 1;
-        this.setState({
-            foodOrderCount
-        }, () => {
-            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Subraction);
-        });
+        this.props.parentUpdateBasket(this.props.food, ArithmeticOperations.Subraction);
     }
 
     render () {
-
-        let totalBasketItemAmount = (this.state.foodOrderCount.orderCount * this.props.food.price).toLocaleString('en-US', options);
+        let foodOrderCount = this.props.foodOrder.foodOrderCounts.find(foc => foc.foodId === this.props.food.id);
+        let totalBasketItemAmount = foodOrderCount ? foodOrderCount.orderCount * this.props.food.price : 0;
+        let totalBasketItemAmountAsString = totalBasketItemAmount.toLocaleString('en-US', options);
         return (
         <div className="basket-grid-container py-4 border-bottom user-select-none">
             <div className="content-center">
@@ -51,7 +33,7 @@ class BasketItem extends React.Component {
                 </svg>
             </div>
             <div className="content-center">
-                <p className="text-medium mb-0">{this.state.foodOrderCount.orderCount}</p>
+                <p className="text-medium mb-0">{foodOrderCount ? foodOrderCount.orderCount : 0}</p>
             </div>
             <div className="content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg arithmetic-icon" onClick={() => this.addOrder()} viewBox="0 0 16 16">
@@ -65,7 +47,9 @@ class BasketItem extends React.Component {
                 <p className="text-notsosmall mb-0">{this.props.food.name}</p>
             </div>
             <div className="d-flex flex-row align-items-center">
-                <p className="text-medium mb-0">{totalBasketItemAmount}</p>
+                {
+                    totalBasketItemAmount === 0 ? <p className="text-medium text-danger mb-0 cursor-pointer" onClick={() => this.props.removeItem(this.props.foodOrderCount)}>Remove</p> : <p className="text-medium mb-0">{totalBasketItemAmountAsString}</p>
+                }
             </div>
         </div>
     )};
