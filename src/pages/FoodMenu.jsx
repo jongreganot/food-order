@@ -17,7 +17,7 @@ class FoodMenu extends React.Component {
                             return (
                                 <FoodCard key={`FoodCard-${index}`}
                                         food={food} 
-                                        parentAddFoodToBasket={this.props.parentAddFoodToBasket}
+                                        parentUpdateFoodToBasket={this.props.parentUpdateFoodToBasket}
                                         foodOrderCount={foodOrderCount} />
                             )
                         })

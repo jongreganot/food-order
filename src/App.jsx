@@ -5,6 +5,7 @@ import Basket from './component/Basket';
 import { FoodOrderCount } from './model/FoodOrderCount.ts';
 import { FoodOrder } from './model/FoodOrder.ts';
 import { options } from './constants/options.js';
+import { ArithmeticOperations } from './constants/arithmetic-operations.js';
 
 class App extends React.Component {
   state = {
@@ -20,28 +21,26 @@ class App extends React.Component {
     super();
   }
 
-  addFoodToBasket = (price, foodOrderCount) => {
-    let { numBasketItems, totalAmount, foodOrder } = this.state;
-    this.setState({
-        numBasketItems: numBasketItems += 1,
-        totalAmount: totalAmount + price,
-        totalAmountFormatted: (totalAmount + price).toLocaleString('en-US', options)
-    });
-
-    let existingFoodOrderCount = foodOrder.foodOrderCounts.find(f => f.foodId === foodOrderCount.foodId);
+  updateBasket = (price, foodOrderCount, arithmeticOperation) => {
+    let existingFoodOrderCount = this.state.foodOrder.foodOrderCounts.find(f => f.foodId === foodOrderCount.foodId);
+    let foodOrder = { ...this.state.foodOrder };
+    let { totalAmount, numBasketItems } = this.state;
 
     if (!existingFoodOrderCount) {
-      let foodOrder = { ...this.state.foodOrder };
       foodOrder.foodOrderCounts.push(foodOrderCount);
-
-      this.setState({foodOrder});
     }
     else {
-      let foodOrder = { ...this.state.foodOrder };
       existingFoodOrderCount.orderCount = foodOrderCount.orderCount;
-
-      this.setState({foodOrder});
     }
+
+    console.log(arithmeticOperation);
+
+    this.setState({
+      foodOrder,
+      numBasketItems: arithmeticOperation === ArithmeticOperations.Addition ? numBasketItems + 1 : numBasketItems - 1,
+      totalAmount: arithmeticOperation === ArithmeticOperations.Addition ? totalAmount + price : totalAmount - price,
+      totalAmountFormatted: arithmeticOperation === ArithmeticOperations.Addition ? (totalAmount + price).toLocaleString('en-US', options) : (totalAmount - price).toLocaleString('en-US', options)
+    });
   }
 
   toggleBasket = () => {
@@ -56,7 +55,7 @@ class App extends React.Component {
   render () {
     return (
       <>
-        <Layout parentAddFoodToBasket={this.addFoodToBasket} 
+        <Layout parentUpdateFoodToBasket={this.updateBasket} 
                 numBasketItems={this.state.numBasketItems} 
                 totalAmount={this.state.totalAmountFormatted}
                 parentToggleBasket={this.toggleBasket}
@@ -64,7 +63,10 @@ class App extends React.Component {
         
         { this.state.isBasketOut ? <Mask parentToggleBasket={this.toggleBasket} /> : '' }
 
-        <Basket isBasketOut={this.state.isBasketOut} foodOrder={this.state.foodOrder} totalAmount={this.state.totalAmountFormatted} />
+        <Basket isBasketOut={this.state.isBasketOut} 
+                foodOrder={this.state.foodOrder} 
+                totalAmount={this.state.totalAmountFormatted}
+                parentUpdateFoodToBasket={this.updateBasket} />
       </>
     )
   }

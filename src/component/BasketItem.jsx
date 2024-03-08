@@ -1,27 +1,60 @@
 import React from "react"
 import { options } from "../constants/options";
 import "../styles/component/basket-item-styles.scss";
+import { FoodOrderCount } from "../model/FoodOrderCount.ts";
+import { ArithmeticOperations } from "../constants/arithmetic-operations.js";
 
 class BasketItem extends React.Component {
-   constructor(props) {
-      super(props);
-   }
+    state = {
+        foodOrderCount: new FoodOrderCount(0, 0),
+        totalBasketItemAmount: 0.00
+    }
 
-   render () {
+    constructor(props) {
+        super(props);
+    }
 
-    let totalBasketItemAmount = (this.props.foodOrderCount.orderCount * this.props.food.price).toLocaleString('en-US', options);
-    return (
-        <div className="basket-grid-container py-4 border-bottom">
+    componentDidMount() {
+    if (this.props.foodOrderCount && this.props.foodOrderCount.foodId != 0) {
+            let foodOrderCount = { ...this.state.foodOrderCount };
+            foodOrderCount = this.props.foodOrderCount;
+            this.setState({foodOrderCount});
+        }
+    }
+
+    addOrder() {
+        let foodOrderCount = { ...this.state.foodOrderCount };
+        foodOrderCount.orderCount += 1;
+        this.setState({foodOrderCount}, () => {
+            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Addition);
+        });
+    }
+
+    subtractOrder() {
+        let foodOrderCount = { ...this.state.foodOrderCount };
+        foodOrderCount.orderCount -= 1;
+        this.setState({
+            foodOrderCount
+        }, () => {
+            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Subraction);
+        });
+    }
+
+    render () {
+
+        let totalBasketItemAmount = (this.state.foodOrderCount.orderCount * this.props.food.price).toLocaleString('en-US', options);
+        return (
+        <div className="basket-grid-container py-4 border-bottom user-select-none">
             <div className="content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-dash-lg arithmetic-icon" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-dash-lg arithmetic-icon" onClick={() => this.subtractOrder()} viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
                 </svg>
             </div>
             <div className="content-center">
-                <p className="text-medium mb-0">{this.props.foodOrderCount.orderCount}</p>
+                <p className="text-medium mb-0">{this.state.foodOrderCount.orderCount}</p>
             </div>
             <div className="content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg arithmetic-icon" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg arithmetic-icon" onClick={() => this.addOrder()} viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
                 </svg>
             </div>
@@ -35,8 +68,7 @@ class BasketItem extends React.Component {
                 <p className="text-medium mb-0">{totalBasketItemAmount}</p>
             </div>
         </div>
-     )
-   };
+    )};
 }
 
 export default BasketItem;

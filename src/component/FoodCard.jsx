@@ -2,11 +2,11 @@ import React from "react";
 import "../styles/text-styles.scss"
 import "../styles/component/food-card-styles.scss"
 import { FoodOrderCount } from "../model/FoodOrderCount.ts";
+import { ArithmeticOperations } from "../constants/arithmetic-operations.js";
 
 class FoodCard extends React.Component {
 
     state = {
-        basketClass: "add-to-basket-button",
         foodOrderCount: new FoodOrderCount(0, 0)
     }
 
@@ -19,20 +19,10 @@ class FoodCard extends React.Component {
             let foodOrderCount = { ...this.state.foodOrderCount };
             foodOrderCount = this.props.foodOrderCount;
             this.setState({foodOrderCount});
-            
-            if (this.props.foodOrderCount.orderCount > 0) {
-                this.setState({
-                    basketClass: "add-to-basket-button-outline",
-                });
-            }
         }
     }
 
     addToCart() {
-        this.setState({
-            basketClass: "add-to-basket-button-outline",
-        });
-
         let foodOrderCount = { ...this.state.foodOrderCount };
         foodOrderCount.orderCount =  foodOrderCount.orderCount += 1;
 
@@ -41,7 +31,7 @@ class FoodCard extends React.Component {
         }
         
         this.setState({foodOrderCount}, () => {
-            this.props.parentAddFoodToBasket(this.props.food.price, this.state.foodOrderCount);
+            this.props.parentUpdateFoodToBasket(this.props.food.price, this.state.foodOrderCount, ArithmeticOperations.Addition);
         });
     }
 
@@ -61,13 +51,14 @@ class FoodCard extends React.Component {
                                 <div className="d-flex flex-row justify-content-between">
                                     <p className="fw-bold">{this.props.food.price.toFixed(2)}</p>
                                     <div className="d-flex flex-row justify-content-end">
-                                        <div className={`${basketClass} add-to-basket d-flex flex-row justify-content-center align-items-center`} onClick={() => this.addToCart()}>
-                                            { (foodOrderCount.orderCount > 0) ? 
-                                                <p className="mb-0 text-small">{foodOrderCount.orderCount}</p>
-                                                :
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg plus-sign pe-none" viewBox="0 0 16 16">
-                                                    <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                                </svg> 
+                                        <div className={`${foodOrderCount.orderCount > 0 ? "add-to-basket-button-outline" : "add-to-basket-button"} add-to-basket d-flex flex-row justify-content-center align-items-center`} onClick={() => this.addToCart()}>
+                                            { 
+                                                foodOrderCount.orderCount > 0 ? 
+                                                    <p className="mb-0 text-small">{foodOrderCount.orderCount}</p>
+                                                    :
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-plus-lg plus-sign pe-none" viewBox="0 0 16 16">
+                                                        <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                                    </svg> 
                                             }
                                         </div>
                                     </div>

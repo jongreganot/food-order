@@ -40,7 +40,8 @@ class Basket extends React.Component {
                   return (
                     <BasketItem key={`basketitem-${index}`}
                       foodOrderCount={foodOrderCount}
-                      food={food} />
+                      food={food}
+                      parentUpdateFoodToBasket={this.props.parentUpdateFoodToBasket} />
                   );
                 })
               }
