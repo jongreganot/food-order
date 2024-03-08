@@ -16,11 +16,14 @@
     font-size: g.$font-size-medium;
 }
 
+.text-notsolarge {
+    font-size: g.$font-size-notsolarge;
+}
+
 .text-large {
     font-size: g.$font-size-large;
 }
 
 .text-description {
-    color: gray;
-    font-size: 14px;
+    color: rgb(151, 148, 148);
 }

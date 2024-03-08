@@ -1,3 +1,5 @@
+@use "./global-styles.scss" as g;
+
 .basket {
     width: 0px;
     height: 100%;
@@ -5,11 +7,36 @@
     background-color: white;
     right: 0;
     top: 0;
-    transition: width 1000ms cubic-bezier(0.1, 0.7, 0.6, 0.9);
+    transition: width 380ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
     z-index: 2;
     box-shadow: 10px 10px 10px 10px #888888;
 
     &.active {
         width: 500px;
     }
+}
+
+.checkout-button {
+    width: 100%;
+    background-color: g.$theme-primary;
+    color: white;
+    padding: 6px 12px 6px 12px;
+    border: 0;
+    border-radius: 6px;
+}
+
+.close-button {
+    height: 30px;
+    width: 30px;
+    color: gray;
+}
+
+.clock-icon {
+    height: 14px;
+    width: 14px;
+    color: gray;
+}
+
+.total-amount-section {
+    box-shadow: 15px 15px 15px 10px #888888
 }

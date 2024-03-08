@@ -1,0 +1,26 @@
+@use "../global-styles.scss" as g;
+
+.arithmetic-icon {
+    height: 11px;
+    width: 11px;
+    color: g.$theme-primary;
+}
+
+.arithmetic-icon-container {
+    width: 20px;
+}
+
+.food-item {
+    height: 48px;
+    width: 55px;
+    color: g.$theme-primary;
+}
+
+.order-count {
+    width: 10px;
+}
+
+.basket-grid-container {
+    grid-template-columns: 20px 15px 20px 15px 70px 290px 40px;
+    display: grid;
+}
