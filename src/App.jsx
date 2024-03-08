@@ -59,7 +59,8 @@ class App extends React.Component {
         <Layout parentAddFoodToBasket={this.addFoodToBasket} 
                 numBasketItems={this.state.numBasketItems} 
                 totalAmount={this.state.totalAmountFormatted}
-                parentToggleBasket={this.toggleBasket} />
+                parentToggleBasket={this.toggleBasket}
+                foodOrder={this.state.foodOrder} />
         
         { this.state.isBasketOut ? <Mask parentToggleBasket={this.toggleBasket} /> : '' }
 

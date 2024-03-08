@@ -1,5 +1,4 @@
 import React from "react";
-import restaurant from "../images/restaurant.jpg";
 
 function AboutUs() {
     return (
@@ -10,7 +9,7 @@ function AboutUs() {
             </div>
             <div className="overflow-hidden" style={{maxheight: "30vh"}}>
                 <div className="container px-5">
-                    <img src={restaurant} className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy"></img>
+                    <img src="https://jongreganot-images.s3.ap-northeast-1.amazonaws.com/food-order/restaurant.jpg" className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy"></img>
                 </div>
             </div>
         </div>

@@ -31,8 +31,8 @@ class Basket extends React.Component {
               </div>
             </div>
 
-            <div className="mt-5">
-
+            <div className="mt-5 food-items-section">
+              <hr className="thin-horizontal-line"></hr>
               {
                 this.props.foodOrder.foodOrderCounts.map((foodOrderCount, index) => {
                   let food = foods.find(f => f.id === foodOrderCount.foodId);

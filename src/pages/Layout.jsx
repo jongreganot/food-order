@@ -54,12 +54,12 @@ class Layout extends React.Component {
 
                     <div>
                         <Routes>
-                            <Route index element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} />} ></Route>
-                            <Route path="/food-order" element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} />} />
+                            <Route index element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} foodOrder={this.props.foodOrder} />} ></Route>
+                            <Route path="/food-order" element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} foodOrder={this.props.foodOrder} />} />
                             <Route
                                 exact
                                 path="/food-order/popular"
-                                element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} />}
+                                element={<FoodMenu parentAddFoodToBasket={this.props.parentAddFoodToBasket} foodOrder={this.props.foodOrder} />}
                             ></Route>
                             <Route
                                 exact

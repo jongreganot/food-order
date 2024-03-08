@@ -12,10 +12,6 @@ class BasketItem extends React.Component {
     let totalBasketItemAmount = (this.props.foodOrderCount.orderCount * this.props.food.price).toLocaleString('en-US', options);
     return (
         <div className="basket-grid-container py-4 border-bottom">
-            <div>
-    
-            </div>
-
             <div className="content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-dash-lg arithmetic-icon" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
