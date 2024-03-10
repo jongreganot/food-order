@@ -2,6 +2,8 @@ import React from "react"
 import "../styles/basket-styles.scss";
 import { foods } from "../service/FoodRepository.ts";
 import BasketItem from "./BasketItem.jsx";
+import { Link } from "react-router-dom";
+
 
 class Basket extends React.Component {
    constructor(props) {
@@ -41,7 +43,7 @@ class Basket extends React.Component {
                     <BasketItem key={`basketitem-${index}`}
                       foodOrder={this.props.foodOrder}
                       food={food}
-                      parentUpdateBasket={this.props.parentUpdateBasket}
+                      updateBasket={this.props.updateBasket}
                       removeItem={this.props.removeItem} />
                   );
                 })
@@ -55,9 +57,9 @@ class Basket extends React.Component {
               <p className="text-large fw-bold">Total</p>
               <p className="text-large fw-bold">₱ {this.props.totalAmount}</p>
             </div>
-            <div className="content-center">
-              <button className="checkout-button">Checkout</button>
-            </div>
+            <Link to="/food-order/checkout" className="checkout-link" onClick={() => this.props.checkout(true)}>
+              <div className="content-center">Checkout</div>
+            </Link>
           </div>
 
         </div>

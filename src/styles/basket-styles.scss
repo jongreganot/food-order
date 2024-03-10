@@ -16,13 +16,14 @@
     }
 }
 
-.checkout-button {
-    width: 100%;
-    background-color: g.$theme-primary;
-    color: white;
+.checkout-link {
     padding: 6px 12px 6px 12px;
+    color: black;
+    text-decoration: none;
+    background-color: #FF9843;
     border: 0;
     border-radius: 6px;
+    display: block;
 }
 
 .close-button {

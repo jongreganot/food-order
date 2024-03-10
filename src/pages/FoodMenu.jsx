@@ -7,6 +7,10 @@ class FoodMenu extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.checkout(false);
+    }
+
     render() {
         return (
             <div className="container py-5 mb-3 mt-5">
@@ -16,7 +20,7 @@ class FoodMenu extends React.Component {
                             return (
                                 <FoodCard key={`FoodCard-${index}`}
                                         food={food} 
-                                        parentUpdateBasket={this.props.parentUpdateBasket}
+                                        updateBasket={this.props.updateBasket}
                                         foodOrder={this.props.foodOrder} />
                             )
                         })

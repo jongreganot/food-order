@@ -10,7 +10,7 @@ class FoodCard extends React.Component {
     }
 
     addToCart() {
-        this.props.parentUpdateBasket(this.props.food, ArithmeticOperations.Addition);
+        this.props.updateBasket(this.props.food, ArithmeticOperations.Addition);
     }
 
     render () {
