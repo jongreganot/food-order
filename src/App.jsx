@@ -16,6 +16,7 @@ import {
 import FoodMenu from './pages/FoodMenu.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Checkout from './pages/Checkout.jsx';
+import { foods } from './service/FoodRepository.ts';
 
 class App extends React.Component {
   state = {
@@ -47,14 +48,33 @@ class App extends React.Component {
 
     this.setState({
       foodOrder,
-      totalAmount: arithmeticOperation === ArithmeticOperations.Addition ? totalAmount + food.price : totalAmount - food.price,
-      totalAmountFormatted: arithmeticOperation === ArithmeticOperations.Addition ? (totalAmount + food.price).toLocaleString('en-US', options) : (totalAmount - food.price).toLocaleString('en-US', options)
-    }, this.updateNumBasketItems());
+    }, () => {
+      this.updateNumBasketItems();
+      this.updateTotalAmount();
+    });
   }
 
   updateNumBasketItems() {
     this.setState({
       numBasketItems: this.getTotalNumItemsBasket(),
+    });
+  }
+
+  getTotalAmount() {
+    let totalAmount = 0;
+
+    this.state.foodOrder.foodOrderCounts.map(foc => {
+      let food = foods.find(f => f.id === foc.foodId);
+      totalAmount += food.price * foc.orderCount;
+    });
+
+    return totalAmount;
+  }
+
+  updateTotalAmount() {
+    this.setState({
+      totalAmount: this.getTotalAmount(),
+      totalAmountFormatted: this.getTotalAmount().toLocaleString('en-US', options)
     });
   }
 
@@ -90,7 +110,10 @@ class App extends React.Component {
       let foodOrderCounts = foodOrder.foodOrderCounts.filter(foc => foc.orderCount === 0);
       foodOrderCounts.map(foc => foc.orderCount = 1);
 
-      this.setState({foodOrder}, this.updateNumBasketItems());
+      this.setState({foodOrder}, () => {
+        this.updateNumBasketItems();
+        this.updateTotalAmount();
+      });
     }
   }
 
