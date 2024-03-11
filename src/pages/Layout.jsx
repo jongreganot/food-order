@@ -16,7 +16,7 @@ class Layout extends React.Component {
     render () {
         return (
             <section id="layout">
-                <div className={`${this.props.isCheckout ? "d-none" : "d-block"} shadow py-3 navbar`}>
+                <div className={`${this.props.isHideNavbar ? "d-none" : "d-block"} shadow py-3 navbar`}>
                     <div className="container">
                         <div className="d-flex flex-row align-items-center justify-content-between w-100">
                             <nav className="nav nav-underline d-flex flex-row justify-content-start">

@@ -17,6 +17,7 @@ import FoodMenu from './pages/FoodMenu.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Checkout from './pages/Checkout.jsx';
 import { foods } from './service/FoodRepository.ts';
+import GratitudeOrder from './pages/GratitudeOrder.jsx';
 
 class App extends React.Component {
   state = {
@@ -26,7 +27,9 @@ class App extends React.Component {
     isMaskedOn: false,
     isBasketOut: false,
     foodOrder: new FoodOrder(1, []),
-    isCheckout: false
+    isPageCheckout: false,
+    isPageGratitude: false,
+    isHideNavbar: false
   }
 
   constructor() {
@@ -36,7 +39,6 @@ class App extends React.Component {
   updateBasket = (food, arithmeticOperation) => {
     let existingFoodOrderCount = this.state.foodOrder.foodOrderCounts.find(f => f.foodId === food.id);
     let foodOrder = { ...this.state.foodOrder };
-    let { totalAmount } = this.state;
 
     if (!existingFoodOrderCount) {
       let foodOrderCount = new FoodOrderCount(food.id, 1);
@@ -60,6 +62,40 @@ class App extends React.Component {
     });
   }
 
+  updateTotalAmount() {
+    this.setState({
+      totalAmount: this.getTotalAmount(),
+      totalAmountFormatted: this.getTotalAmount().toLocaleString('en-US', options)
+    });
+  }
+
+  updateIsHideNavbar() {
+    if (this.state.isPageCheckout || this.state.isPageGratitude) {
+      this.setState({
+        isHideNavbar: true
+      });
+    }
+    else {
+      this.setState({
+        isHideNavbar: false
+      });
+    }
+  }
+
+  updateFoodOrder(foodOrder) {
+    this.setState({foodOrder}, () => {
+      this.updateNumBasketItems();
+      this.updateTotalAmount();
+    });
+  }
+
+  resetFoodOrder = () => {
+    let foodOrder = { ...this.state.foodOrder };
+    foodOrder.foodOrderCounts = [];
+
+    this.updateFoodOrder(foodOrder);
+  }
+
   getTotalAmount() {
     let totalAmount = 0;
 
@@ -69,13 +105,6 @@ class App extends React.Component {
     });
 
     return totalAmount;
-  }
-
-  updateTotalAmount() {
-    this.setState({
-      totalAmount: this.getTotalAmount(),
-      totalAmountFormatted: this.getTotalAmount().toLocaleString('en-US', options)
-    });
   }
 
   getTotalNumItemsBasket() {
@@ -104,29 +133,25 @@ class App extends React.Component {
       }, () => {
       document.body.style.overflow = this.state.isMaskedOn ? "hidden" : "visible";
     });
-
-    if (!basketOut) {
-      let foodOrder = { ...this.state.foodOrder };
-      let foodOrderCounts = foodOrder.foodOrderCounts.filter(foc => foc.orderCount === 0);
-      foodOrderCounts.map(foc => foc.orderCount = 1);
-
-      this.setState({foodOrder}, () => {
-        this.updateNumBasketItems();
-        this.updateTotalAmount();
-      });
-    }
   }
 
-  checkout = (isCheckout) => {
-    this.setState({
-      isCheckout: isCheckout
-    });
+  fixRemovedItems = () => {
+    let foodOrder = { ...this.state.foodOrder };
+    let foodOrderCounts = foodOrder.foodOrderCounts.filter(foc => foc.orderCount === 0);
+    foodOrderCounts.map(foc => foc.orderCount = 1);
 
-    if (this.state.foodOrder.foodOrderCounts.length > 0 && !isCheckout)
-      this.pullBasket(true);
+    this.updateFoodOrder(foodOrder);
+  }
 
-    if (isCheckout)
-      this.pullBasket(false);
+  setIsPageCheckout = (isPageCheckout) => {
+    this.setState({isPageCheckout}, this.updateIsHideNavbar);
+  }
+
+  setIsPageGratitude = (isPageGratitude) => {
+    this.setState({isPageGratitude}, this.updateIsHideNavbar);
+
+    // if (!isPageGratitude)
+    //   this.resetFoodOrder();
   }
 
   render () {
@@ -137,13 +162,16 @@ class App extends React.Component {
                 totalAmount={this.state.totalAmountFormatted}
                 pullBasket={this.pullBasket}
                 foodOrder={this.state.foodOrder}
-                isCheckout={this.state.isCheckout} />
+                isHideNavbar={this.state.isHideNavbar} />
         
         <Routes>
             <Route
                 exact
                 path="/food-order/popular"
-                element={<FoodMenu updateBasket={this.updateBasket} foodOrder={this.state.foodOrder} checkout={this.checkout} />}></Route>
+                element={<FoodMenu updateBasket={this.updateBasket} 
+                                    pullBasket={this.pullBasket} 
+                                    foodOrder={this.state.foodOrder}
+                                    fixRemovedItems={this.fixRemovedItems} />}></Route>
             <Route
                 exact
                 path="/food-order/about"
@@ -155,17 +183,24 @@ class App extends React.Component {
                 element={<Checkout foodOrder={this.state.foodOrder}
                                     updateBasket={this.updateBasket}
                                     removeItem={this.removeItem}
-                                    totalAmount={this.state.totalAmountFormatted} />}></Route>
+                                    totalAmount={this.state.totalAmountFormatted}
+                                    setIsPageCheckout={this.setIsPageCheckout}
+                                    pullBasket={this.pullBasket} />}></Route>
+            <Route
+                exact
+                path="/food-order/thank-you"
+                element={<GratitudeOrder setIsPageGratitude={this.setIsPageGratitude} 
+                                          resetFoodOrder={this.resetFoodOrder} />}></Route>
         </Routes>
         
-        { this.state.isBasketOut ? <Mask pullBasket={this.pullBasket} /> : '' }
+        { this.state.isBasketOut ? <Mask pullBasket={this.pullBasket} 
+                                          fixRemovedItems={this.fixRemovedItems} /> : '' }
 
         <Basket isBasketOut={this.state.isBasketOut} 
                 foodOrder={this.state.foodOrder} 
                 totalAmount={this.state.totalAmountFormatted}
                 updateBasket={this.updateBasket}
-                removeItem={this.removeItem}
-                checkout={this.checkout} />
+                removeItem={this.removeItem} />
       </Router>
     )
   }

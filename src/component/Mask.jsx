@@ -8,7 +8,10 @@ class Mask extends React.Component {
 
    render () {
      return (
-       <div className="mask" onClick={() => this.props.pullBasket(false)}>
+       <div className="mask" onClick={() => {
+          this.props.pullBasket(false);
+          this.props.fixRemovedItems();
+        }}>
           
        </div>
      )

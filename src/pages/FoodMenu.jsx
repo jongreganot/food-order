@@ -8,7 +8,13 @@ class FoodMenu extends React.Component {
     }
 
     componentDidMount() {
-        this.props.checkout(false);
+        if (this.props.foodOrder.foodOrderCounts.length > 0)
+            this.props.pullBasket(true);
+    }
+
+    componentWillUnmount() {
+        this.props.pullBasket(false);
+        this.props.fixRemovedItems();
     }
 
     render() {

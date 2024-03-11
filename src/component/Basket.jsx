@@ -57,7 +57,7 @@ class Basket extends React.Component {
               <p className="text-large fw-bold">Total</p>
               <p className="text-large fw-bold">₱ {this.props.totalAmount}</p>
             </div>
-            <Link to="/food-order/checkout" className="checkout-link" onClick={() => this.props.checkout(true)}>
+            <Link to="/food-order/checkout" className="checkout-link">
               <div className="content-center">Checkout</div>
             </Link>
           </div>

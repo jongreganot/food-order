@@ -1,9 +1,18 @@
+import { Link } from "react-router-dom";
 import OrderSummary from "../component/OrderSummary";
 import React, { Component } from 'react';
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.setIsPageCheckout(true);
+    }
+
+    componentWillUnmount() {
+        this.props.setIsPageCheckout(false);
     }
 
     render() { 
@@ -36,7 +45,9 @@ class Checkout extends Component {
                                 <p className="mb-0 text-large fw-bold">₱ {this.props.totalAmount}</p>
                             </div>
                             <div>
-                                <button className="order-button">Place Order</button>
+                                <Link to="/food-order/thank-you" className="order-link">
+                                    <div className="content-center">Place Order</div>
+                                </Link>
                             </div>
                         </div>
                     </div>
