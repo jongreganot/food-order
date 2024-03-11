@@ -15,6 +15,7 @@
     color: white;
     text-decoration: none;
     background-color: g.$theme-primary;
+    transition: g.$transition-background-color;
     border: 0;
     border-radius: 6px;
     display: block;

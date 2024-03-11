@@ -49,7 +49,7 @@ class BasketItem extends React.Component {
                     </div>
                     <div className="d-flex flex-row align-items-center">
                     {
-                        totalBasketItemAmount === 0 ? <p className="text-medium text-danger mb-0 cursor-pointer" onClick={() => this.props.removeItem(this.props.foodOrderCount)}>Remove</p> : <p className="text-medium mb-0">{totalBasketItemAmountAsString}</p>
+                        totalBasketItemAmount === 0 ? <p className="text-medium text-danger mb-0 cursor-pointer" onClick={() => this.props.removeItem(this.props.food)}>Remove</p> : <p className="text-medium mb-0">{totalBasketItemAmountAsString}</p>
                     }
                     </div>
                 </div>

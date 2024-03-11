@@ -29,8 +29,13 @@
 
 .basket-button {
     background-color: g.$theme-primary;
+    transition: g.$transition-background-color;
     border: 0;
     color: white;
+
+    &:hover {
+        background-color: g.$color-button-hover;
+    }
 }
 
 .basket-button-outline {

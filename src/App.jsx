@@ -35,7 +35,7 @@ class App extends React.Component {
   updateBasket = (food, arithmeticOperation) => {
     let existingFoodOrderCount = this.state.foodOrder.foodOrderCounts.find(f => f.foodId === food.id);
     let foodOrder = { ...this.state.foodOrder };
-    let { totalAmount, numBasketItems } = this.state;
+    let { totalAmount } = this.state;
 
     if (!existingFoodOrderCount) {
       let foodOrderCount = new FoodOrderCount(food.id, 1);
@@ -47,16 +47,32 @@ class App extends React.Component {
 
     this.setState({
       foodOrder,
-      numBasketItems: arithmeticOperation === ArithmeticOperations.Addition ? numBasketItems + 1 : numBasketItems - 1,
       totalAmount: arithmeticOperation === ArithmeticOperations.Addition ? totalAmount + food.price : totalAmount - food.price,
       totalAmountFormatted: arithmeticOperation === ArithmeticOperations.Addition ? (totalAmount + food.price).toLocaleString('en-US', options) : (totalAmount - food.price).toLocaleString('en-US', options)
+    }, this.updateNumBasketItems());
+  }
+
+  updateNumBasketItems() {
+    this.setState({
+      numBasketItems: this.getTotalNumItemsBasket(),
     });
   }
 
-  removeItem = (foodOrderCount) => {
-    let foodOrder = { ...this.state.foodOrder };
+  getTotalNumItemsBasket() {
+    let totalNumberItems = 0;
 
-    foodOrder.foodOrderCounts.splice(foodOrderCount, 1);
+    this.state.foodOrder.foodOrderCounts.map(foc => {
+      totalNumberItems += foc.orderCount;
+    });
+
+    return totalNumberItems;
+  }
+
+  removeItem = (food) => {
+    let foodOrder = { ...this.state.foodOrder };
+    let foodOrderCount = foodOrder.foodOrderCounts.find(foc => foc.foodId === food.id);
+    let index = foodOrder.foodOrderCounts.indexOf(foodOrderCount);
+    foodOrder.foodOrderCounts.splice(index, 1);
 
     this.setState({foodOrder});
   }
@@ -68,6 +84,14 @@ class App extends React.Component {
       }, () => {
       document.body.style.overflow = this.state.isMaskedOn ? "hidden" : "visible";
     });
+
+    if (!basketOut) {
+      let foodOrder = { ...this.state.foodOrder };
+      let foodOrderCounts = foodOrder.foodOrderCounts.filter(foc => foc.orderCount === 0);
+      foodOrderCounts.map(foc => foc.orderCount = 1);
+
+      this.setState({foodOrder}, this.updateNumBasketItems());
+    }
   }
 
   checkout = (isCheckout) => {

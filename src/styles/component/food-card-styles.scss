@@ -13,10 +13,10 @@
 
 .add-to-basket-button {
     background-color: g.$theme-primary;
-    transition: background-color 250ms ease-in-out;
+    transition: g.$transition-background-color;
 
     &:hover {
-        background-color: g.$theme-secondary;
+        background-color: g.$color-button-hover;
     }
 }
 
