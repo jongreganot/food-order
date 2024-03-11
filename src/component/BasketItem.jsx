@@ -43,13 +43,15 @@ class BasketItem extends React.Component {
                 <div className="content-center">
                     <img src={this.props.food.image} className="food-item ps-1"></img>
                 </div>
-                <div className="d-flex flex-row align-items-center">
-                    <p className="text-notsosmall mb-0">{this.props.food.name}</p>
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                {
-                    totalBasketItemAmount === 0 ? <p className="text-medium text-danger mb-0 cursor-pointer" onClick={() => this.props.removeItem(this.props.foodOrderCount)}>Remove</p> : <p className="text-medium mb-0">{totalBasketItemAmountAsString}</p>
-                }
+                <div className="d-flex flex-row justify-content-between">
+                    <div className="d-flex flex-row align-items-center">
+                        <p className="text-notsosmall mb-0">{this.props.food.name}</p>
+                    </div>
+                    <div className="d-flex flex-row align-items-center">
+                    {
+                        totalBasketItemAmount === 0 ? <p className="text-medium text-danger mb-0 cursor-pointer" onClick={() => this.props.removeItem(this.props.foodOrderCount)}>Remove</p> : <p className="text-medium mb-0">{totalBasketItemAmountAsString}</p>
+                    }
+                    </div>
                 </div>
             </div>
     )};

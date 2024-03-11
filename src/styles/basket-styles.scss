@@ -17,13 +17,17 @@
 }
 
 .checkout-link {
-    padding: 6px 12px 6px 12px;
-    color: black;
+    padding: 6px 10px 6px 10px;
+    color: white;
     text-decoration: none;
-    background-color: #FF9843;
+    background-color: g.$theme-primary;
     border: 0;
     border-radius: 6px;
     display: block;
+}
+
+.checkout-link:hover {
+    background-color: g.$color-button-hover;
 }
 
 .close-button {

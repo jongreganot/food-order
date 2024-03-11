@@ -107,7 +107,8 @@ class App extends React.Component {
                 path="/food-order/checkout"
                 element={<Checkout foodOrder={this.state.foodOrder}
                                     updateBasket={this.updateBasket}
-                                    removeItem={this.removeItem} />}></Route>
+                                    removeItem={this.removeItem}
+                                    totalAmount={this.state.totalAmountFormatted} />}></Route>
         </Routes>
         
         { this.state.isBasketOut ? <Mask pullBasket={this.pullBasket} /> : '' }

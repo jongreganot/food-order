@@ -1,3 +1,5 @@
+@use "./global-styles.scss" as g;
+
 .checkout-page-item {
     width: 700px;
     padding-top: 1.5rem;
@@ -5,4 +7,26 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     background-color: white;
+}
+
+.order-button {
+    padding: 12px 12px 12px 12px;
+    width: 300px;
+    color: white;
+    text-decoration: none;
+    background-color: g.$theme-primary;
+    border: 0;
+    border-radius: 6px;
+    display: block;
+}
+
+.order-button:hover {
+    background-color: g.$color-button-hover;
+}
+
+.total-amount-checkout-section {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    bottom: 0;
 }

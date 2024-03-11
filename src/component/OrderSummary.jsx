@@ -24,6 +24,10 @@ class OrderSummary extends Component {
                             );
                           })
                     }
+                    <div className="d-flex flex-row justify-content-between pt-3">
+                        <p className="text-notsolarge mb-0">Sub-total</p>
+                        <p className="text-notsolarge mb-0">₱ {this.props.totalAmount}</p>
+                    </div>
                 </div>
             </div>
         </div>
