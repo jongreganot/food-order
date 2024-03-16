@@ -22,7 +22,7 @@ class Checkout extends Component {
                     <div className="bg-white">
                         <div className="container px-4">
                             <div className="d-flex flex-column align-items-center justify-content-start pt-5 pb-3">
-                                <div className="checkout-page-item ps-0">
+                                <div className="checkout-page-item text-md-start text-center ps-0">
                                     <p className="text-title mb-0 fw-bold">Last Step - Checkout</p>
                                 </div>
                             </div>

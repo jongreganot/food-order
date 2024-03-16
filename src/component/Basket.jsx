@@ -16,7 +16,7 @@ class Basket extends React.Component {
         <div className="d-flex flex-column justify-content-between h-100">
           <div className="overflow-auto">
             <div className="d-flex flex-row justify-content-start align-items-center pt-3 pb-2 border-bottom">
-              <div className="col-2 d-flex flex-row ps-4">
+              <div className="col-2 d-flex flex-row ps-md-4 ps-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-x close-button" viewBox="0 0 16 16">
                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                 </svg>

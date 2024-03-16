@@ -44,7 +44,7 @@ class BasketItem extends React.Component {
                     <img src={this.props.food.image} className="food-item ps-1"></img>
                 </div>
                 <div className="d-flex flex-row justify-content-between">
-                    <div className="d-flex flex-row align-items-center">
+                    <div className="d-flex flex-row align-items-center ps-2">
                         <p className="text-notsosmall mb-0">{this.props.food.name}</p>
                     </div>
                     <div className="d-flex flex-row align-items-center">

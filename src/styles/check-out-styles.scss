@@ -31,3 +31,43 @@
     width: 100%;
     bottom: 0;
 }
+
+@media (max-width: 540px) {
+    .checkout-page-item {
+        width: 475px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .checkout-page-item {
+        width: 355px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .order-link {
+        width: 170px;
+    }
+    
+}
+
+@media (max-width: 390px) {
+    .checkout-page-item {
+        width: 325px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .order-link {
+        width: 153px;
+    }
+    
+}
